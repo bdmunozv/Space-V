@@ -1,0 +1,348 @@
+:root {
+    --secondLight: #FFFFFF;
+    --mainLight: #13353B;
+    --backgroundColor: rgba(255, 255, 255, 0.6);
+    --fontP: 'Roboto', sans-serif;
+    --loginBg : url(./src/img/login_light/fondo-claro.png) no-repeat left center var(--mainLight);
+    --userIcon : url(./src/img/login_light/user-dark.svg);
+    --passwordIcon : url(./src/img/login_light/password-dark.svg);
+    --eyeCloseicon : url(./src/img/login_light/eye-close-dark.svg);
+    --eyeOpenIcon : url(./src/img/login_light/eye-open-dark.svg);
+    --arrowRightIcon:url(./src/img/login_light/right.svg);
+    --SpaceIcon : url(./src/img/login_light/logo-color.svg);
+    --colorCheck : #B9CC2F;
+}
+
+html{
+    margin: 0px;
+    padding: 0px;
+    height: 100%
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondLight);
+    font-family: var(--fontP);
+}
+
+.user-icon{
+    content: var(--userIcon) !important;
+    width: 0.9em;
+}
+
+.password-icon{
+    content: var(--passwordIcon) !important;
+    width: 0.9em;
+}
+
+.eye-close{
+    content: var(--eyeCloseicon) !important;
+}
+
+.eye-open{
+    content: var(--eyeOpenIcon) !important;
+}
+.arrow-right{
+    content: var(--arrowRightIcon) !important;
+}
+
+.contentBg {
+    background: var(--loginBg) padding-box; 
+    position: fixed;
+    min-width: 100%;
+    min-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-size: cover;
+    opacity: 1;
+}
+
+.contentBg video{
+    position: fixed;
+    min-width: 100%;
+    min-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-size: cover;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-area: header;
+}
+
+header .WTIcon{
+    content: var(--SpaceIcon);
+    width: 10vw;
+    padding-top: 8%;
+}
+
+header h1 {
+    font: normal normal normal 2vw var(--fontP);
+    letter-spacing: 0px;
+    text-align: center;
+    color: var(--mainLight);
+}
+
+.sectionLogin {
+    margin:0;
+    position: absolute;
+    right: 0px;
+    bottom: 0;
+    width: 42vw;
+    backdrop-filter: blur(5px);
+    height: 100%;
+    grid-area: section;
+    background-color: var(--backgroundColor);
+    display: grid;
+    grid-template-rows: auto 0% auto 8% auto;
+    grid-template-columns: auto 80% auto;
+    grid-template-areas:
+      ". header ."
+      ". . ."
+      ". form ."
+      ". . ."
+      ". footer .";
+    grid-gap: 5px;
+    overflow: auto;
+}
+
+.input-box {
+    position: relative;
+    display: block;
+}
+  
+.login-form{
+    grid-area: form;
+}
+
+.input-box .icon-end{
+    position:absolute;
+    right:0px;
+    top:50%;
+    margin-left:20px;
+    color: var(--mainLight);
+}
+
+.login-form .input-box {
+    position:relative;
+    width:100%;
+    margin:32px 0;
+    border-bottom:1px solid var(--mainLight);
+}
+
+.login-form .input-box label {
+    position:absolute;
+    top:-30%;
+    left:0px;
+    /* transform:translateY(-50%); */
+    font-size:0.9em;
+    color: var(--mainLight);
+    pointer-events:none;
+    /* transition:.5s; */
+}
+
+/* .input-box input:focus  ~ label,
+.input-box input:valid  ~ label {
+    top:-5px;
+    left:0px;
+} */
+.input-box input {
+    width: 82%;
+    height: 35px;
+    background:transparent;
+    border:none;
+    outline:none;
+    font-size:1.2em;
+    color:var(--mainLight);
+    padding: 10px 2% 0 2%;
+}
+
+.rememberUser-box{
+    display: flex;
+    margin-top: 7%;
+}
+
+.rememberUser-box input{
+    margin: 0;
+    cursor: pointer;
+}
+
+.rememberUser-box label{
+    font-size: 0.8em;
+    color: var(--mainLight);
+    cursor: pointer;
+    margin: 0;
+}
+
+input[type="checkbox"] + label:before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    float: left;
+    margin: -0.1em 0.5em 0 0;
+    border: 1px solid var(--mainLight);
+    background: transparent;
+}
+
+input[type="checkbox"]:checked + label:after {
+    content: "";
+    width: 9px;
+    height: 4px;
+    border: 3.4px solid var(--colorCheck);
+    float: left;
+    margin-left: -1.6em;
+    margin-top: 0.13em;
+    border-right: 0;
+    border-top: 0;
+    transform: rotate(-50deg);
+}
+
+input[type="checkbox"] {
+	display: none;
+}
+
+.btnLogin{
+    display: flex;
+    align-items: center;
+    margin: 4vh 0px;
+    height: 12%;
+    width: fit-content;
+    color: var(--secondLight);
+    background: var(--mainLight);
+    text-align: left;
+    padding: 0px 3%;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 0.8em;
+    font-family: var(--fontP);
+    font-weight: bold;
+}
+
+.btnLogin i{
+    margin-left: 12vw;
+    color: var(--secondLight) !important;
+}
+  
+.language-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.language-box a{
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.lang-name{
+    display: flex; 
+    align-items: center;
+}
+
+#selLang{
+    background-color: transparent;
+    border: none;
+    width: 110px;
+}
+
+.lang-name .lang-options{
+    width: 22px;
+    margin-right: 4%;
+}
+
+.lang-name .lang-label{
+    width: 22px;
+}
+
+footer {
+    grid-area: footer;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-family: var(--fontP);
+    text-align: center;
+    font-size: 0.8em;
+}
+
+footer a{
+    color: var(--mainLight);
+    font-size: 0.9em;
+    text-decoration: underline;
+    margin-bottom: 0;
+}
+
+footer h3{
+    color: var(--mainLight);
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+footer p{
+    margin-bottom: 0;
+}
+
+a:visited{
+    color: var(--mainLight);
+}
+
+@media only screen and (max-width: 800px) {
+    .sectionLogin{
+        width: 60vw;
+    }
+
+    header .WTIcon {
+        width: 16vw;
+    }
+
+    header h1{
+        font: normal normal normal 3vw var(--fontP);
+    }
+
+    .language-box a {
+        font-size: 0.8em;
+    }
+
+    footer h3 {
+        font-size: 2vw;
+    }
+} 
+
+@media only screen and (max-width: 600px) {
+    .sectionLogin{
+        width: 100vw;
+    }
+
+    header .WTIcon {
+        width: 26vw;
+    }
+
+    header h1{
+        font: normal normal normal 4vw var(--fontP);
+    }
+    .language-box a {
+        font-size: 0.8em;
+    }
+
+    .btnLogin{
+        width: -webkit-fill-available;
+    }
+
+    .btnLogin i{
+        margin-left: auto;
+    }
+
+    footer h3 {
+        font-size: 3.3vw;
+    }
+}
+
+

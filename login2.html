@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login 2</title>
+    <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/23.1.6/css/dx.light.compact.css">
+    <link rel="stylesheet" href="./style2.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn3.devexpress.com/jslib/23.1.6/js/dx.all.js"></script>
+    
+</head>
+<body >
+    <div class="container" id="appLogin" >
+        <div class="contentBg">
+            <!-- <video autoplay loop class="videoBg" muted plays-inline>
+                <source src="./src/video/video_fondo1.mp4" type="video/mp4">    
+            </video> -->
+        </div>
+        <section  class="sectionLogin">
+            <header>
+                <img class="WTIcon" alt="Space Logo">
+            </header>
+            <form class="login-form">
+                <div class="input-box">
+                    <i class="user-icon icon-start"></i>
+                    <input type="text" v-model="inputUser">
+                    <label>{{ labels.labelUser }}</label>
+                </div>
+            
+                <div class="input-box">
+                    <i class="password-icon icon-start"></i>
+                    <input :type="ispassword" v-model="inputPassword">
+                    <label>{{ labels.labelPassword }}</label>
+                    <i :class="eyeState" class="icon-end" @mousedown="showPassword" @mouseup="showPassword"></i>
+                </div>
+                
+                <div class="rememberUser-box">
+                    <input type="checkbox" id="rememberUser" v-model="bolRememberMe">
+                    <label for="rememberUser">{{ labels.labelRememberMe }}</label>
+                </div>
+                <button class="btnLogin" @click="Login">
+                    <span >{{ labels.labelButtonLogin }}
+                    </span>
+                </button>
+                
+                <div class="language-box">
+                    <div id="selLang"></div>
+                </div>    
+            </form>
+            <div class="footer-section">
+                <p><a target="_blank" href="https://www.widetech.co#soluciones"> {{ labels.anchorDescoveryUs }}</a>
+                <br><a target="_blank" href="https://widetech.co/politicas-y-certificaciones/">{{ labels.anchorPolicy }}</a></p>
+            </div>
+        </section>
+        <footer>
+            <h3><span>© Copyright {{strCopyrightYear}} {{ labels.labelDerechosReservados }}</span></h3>
+        </footer>
+    </div>
+
+    <script src="./login.js"></script>
+</body>
+</html>
