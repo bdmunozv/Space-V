@@ -1,7 +1,7 @@
 :root {
     --secondLight: #FFFFFF;
     --mainLight: #13353B;
-    --backgroundColor: rgba(255, 255, 255, 0.5);
+    --backgroundColor: rgba(255, 255, 255, 0.2);
     --sectionBackgroundColor: #00000026;
     --backgroundBtn: #13353B80;
     --borderBtn: #13353B;
@@ -35,35 +35,37 @@ body{
 .container{
     display: grid;
     grid-template-rows: 8% auto 8%;
-    grid-template-columns: auto 460px auto;
+    grid-template-columns: auto 350px auto;
     grid-template-areas:
         ". . ."
         ". section ."
         ". footer .";
     grid-gap: 5px;
-    height: 100%;
 }
 
 
 .user-icon{
     content: var(--userIcon) !important;
-    width: 0.9em;
+    width: 0.7em;
 }
 
 .password-icon{
     content: var(--passwordIcon) !important;
-    width: 0.9em;
+    width: 0.7em;
 }
 
 .eye-close{
     content: var(--eyeCloseicon) !important;
+    width: 0.9em;
 }
 
 .eye-open{
     content: var(--eyeOpenIcon) !important;
+    width: 0.9em;
 }
 .arrow-right{
     content: var(--arrowRightIcon) !important;
+    width: 0.5em;
 }
 
 .contentBg {
@@ -98,8 +100,8 @@ header{
 
 header .WTIcon{
     content: var(--SpaceIcon);
-    width: 120px;
-    padding-top: 4%;
+    width: 80px;
+    padding-top: 15%;
 }
 
 .sectionLogin {
@@ -108,12 +110,12 @@ header .WTIcon{
     border-radius: 50px 0px;
     opacity: 1;
     backdrop-filter: blur(5px);
-    height: 100%;
-    min-height: 500px;
+    height: 80%;
+    min-height: 450px;
     grid-area: section;
     background-color: var(--backgroundColor);
     display: grid;
-    grid-template-rows: auto 0% auto 3% auto;
+    grid-template-rows: auto 0% auto 0% auto;
     grid-template-columns: auto 68% auto;
     grid-template-areas:
       ". header ."
@@ -123,6 +125,7 @@ header .WTIcon{
       ". footer-section .";
     grid-gap: 5px;
     overflow: auto;
+    margin: auto 0 auto 0;
 }
 
 .login-form{
@@ -133,7 +136,7 @@ header .WTIcon{
 .login-form .input-box {
     position: relative;
     width: 100%;
-    margin: 40px 0 12px 0;
+    margin: 30px 0 0 0;
     border-radius: 14px;
     background: var(--secondLight);
     box-shadow: inset 0px 3px 5px #13353B40;
@@ -144,14 +147,14 @@ header .WTIcon{
     position:absolute;
     top:-60%;
     left:0px;
-    font-size:0.9em;
+    font-size:0.75em;
     color: var(--mainLight);
     pointer-events:none;
 }
 
 .input-box input {
-    width: 77%;
-    height: 40px;
+    width: 75%;
+    height: 35px;
     background: transparent;
     border: none;
     outline: none;
@@ -163,7 +166,7 @@ header .WTIcon{
 .input-box .icon-start{
     left: 12px;
     top: 13px;
-    width: 0.8em !important;
+    width: 0.7em !important;
     position: absolute;
 }
 
@@ -184,10 +187,10 @@ header .WTIcon{
 }
 
 .rememberUser-box label{
-    font-size: 0.8em;
+    font-size: 0.65em;
     color: var(--mainLight);
     cursor: pointer;
-    margin: 0;
+    margin-top: 10px;
 }
 
 input[type="checkbox"] + label:before {
@@ -221,18 +224,18 @@ input[type="checkbox"] {
 .btnLogin{
     display: flex;
     align-items: center;
-    margin: 4vh 0px;
+    margin: 3vh 0px;
     height: 12%;
     width: 100%;
     color: var(--secondLight);
     background: var(--backgroundBtn);
     text-align: center;
     text-transform:uppercase;
-    border-radius: 14px;
+    border-radius: 10px;
     border: none;
     outline: none;
     cursor: pointer;
-    font-size: 0.8em;
+    font-size: 0.7em;
     font-weight: bold;
     justify-content: center;
     border: 2px solid var(--borderBtn);
@@ -288,14 +291,14 @@ input[type="checkbox"] {
 
 .footer-section a{
     color: var(--mainLight);
-    font-size: 0.9em;
+    font-size: 0.75em;
     text-decoration: underline;
-    margin-bottom: 0;
+    margin-top: 5px;
 }
 
 footer h3{
     color: var(--mainLight);
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: bold;
 }
 
@@ -344,7 +347,9 @@ footer {
         ". form ."
         ". . ."
         ". footer-section .";
-        grid-gap: 0px;            
+        grid-gap: 0px;
+        height: 100%;
+        margin: 0;            
     }
 
     footer h3{

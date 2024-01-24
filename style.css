@@ -1,6 +1,7 @@
 :root {
     --secondLight: #FFFFFF;
     --mainLight: #13353B;
+    --darkColor: #1D1D1D;
     --backgroundColor: rgba(255, 255, 255, 0.6);
     --fontP: 'Roboto', sans-serif;
     --loginBg : url(./src/img/login_light/fondo-claro.png) no-repeat left center var(--mainLight);
@@ -28,23 +29,26 @@ body{
 
 .user-icon{
     content: var(--userIcon) !important;
-    width: 0.9em;
+    width: 0.7em;
 }
 
 .password-icon{
     content: var(--passwordIcon) !important;
-    width: 0.9em;
+    width: 0.7em;
 }
 
 .eye-close{
     content: var(--eyeCloseicon) !important;
+    width: 0.9em;
 }
 
 .eye-open{
     content: var(--eyeOpenIcon) !important;
+    width: 0.9em;
 }
 .arrow-right{
     content: var(--arrowRightIcon) !important;
+    width: 0.5em;
 }
 
 .contentBg {
@@ -78,12 +82,12 @@ header{
 
 header .WTIcon{
     content: var(--SpaceIcon);
-    width: 10vw;
-    padding-top: 8%;
+    width: 100px;
+    padding-top: 10%;
 }
 
 header h1 {
-    font: normal normal normal 2vw var(--fontP);
+    font: normal normal normal 1.7vw var(--fontP);
     letter-spacing: 0px;
     text-align: center;
     color: var(--mainLight);
@@ -94,14 +98,14 @@ header h1 {
     position: absolute;
     right: 0px;
     bottom: 0;
-    width: 42vw;
+    width: 40vw;
     backdrop-filter: blur(5px);
     height: 100%;
     grid-area: section;
     background-color: var(--backgroundColor);
     display: grid;
     grid-template-rows: auto 0% auto 8% auto;
-    grid-template-columns: auto 80% auto;
+    grid-template-columns: auto 75% auto;
     grid-template-areas:
       ". header ."
       ". . ."
@@ -132,7 +136,7 @@ header h1 {
 .login-form .input-box {
     position:relative;
     width:100%;
-    margin:32px 0;
+    margin-top:25px;
     border-bottom:1px solid var(--mainLight);
 }
 
@@ -141,7 +145,7 @@ header h1 {
     top:-30%;
     left:0px;
     /* transform:translateY(-50%); */
-    font-size:0.9em;
+    font-size:0.75em;
     color: var(--mainLight);
     pointer-events:none;
     /* transition:.5s; */
@@ -154,7 +158,7 @@ header h1 {
 } */
 .input-box input {
     width: 82%;
-    height: 35px;
+    height: 25px;
     background:transparent;
     border:none;
     outline:none;
@@ -165,7 +169,7 @@ header h1 {
 
 .rememberUser-box{
     display: flex;
-    margin-top: 7%;
+    margin-top: 5%;
 }
 
 .rememberUser-box input{
@@ -174,7 +178,7 @@ header h1 {
 }
 
 .rememberUser-box label{
-    font-size: 0.8em;
+    font-size: 0.65em;
     color: var(--mainLight);
     cursor: pointer;
     margin: 0;
@@ -205,7 +209,7 @@ input[type="checkbox"]:checked + label:after {
 }
 
 input[type="checkbox"] {
-	display: none;
+    display: none;
 }
 
 .btnLogin{
@@ -239,8 +243,9 @@ input[type="checkbox"] {
 }
 
 .language-box a{
-    font-size: 0.8em;
+    font-size: 0.75em;
     text-align: center;
+    color: var(--darkColor);
 }
 
 .lang-name{
@@ -274,16 +279,17 @@ footer {
 }
 
 footer a{
-    color: var(--mainLight);
-    font-size: 0.9em;
+    color: var(--darkColor);
+    font-size: 0.75em;
     text-decoration: underline;
     margin-bottom: 0;
 }
 
 footer h3{
-    color: var(--mainLight);
-    font-size: 1.2em;
+    color: var(--darkColor);
+    font-size: 0.9em;
     font-weight: bold;
+    margin: 5px 0px 10px 0px;
 }
 
 footer p{
@@ -311,9 +317,6 @@ a:visited{
         font-size: 0.8em;
     }
 
-    footer h3 {
-        font-size: 2vw;
-    }
 } 
 
 @media only screen and (max-width: 600px) {
@@ -338,10 +341,6 @@ a:visited{
 
     .btnLogin i{
         margin-left: auto;
-    }
-
-    footer h3 {
-        font-size: 3.3vw;
     }
 }
 
