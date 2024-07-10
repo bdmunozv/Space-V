@@ -1,3 +1,6 @@
+ import { createToast }  from '../utilities/Toast/toast2.js';
+
+
 const vueLogin = Vue.createApp({
 
     data(){
@@ -67,63 +70,55 @@ const vueLogin = Vue.createApp({
             ispassword: "password",
             bolRememberMe: false,
             strCopyrightYear: new Date().getFullYear(),
+            isDropdownOpen: false,
+            selectedLanguage: {
+              id: 'es',
+              name: 'Español',
+              imgLang: '../src/img/login_light/espanol.png',
+            },
             languages: [{
-                ID: 'es',
-                language: 'Español',
-                imgLang: './src/img/login_light/espanol.png',
+                id: 'es',
+                name: 'Español',
+                imgLang: '../src/img/login_light/espanol.png',
               }, {
-                ID: 'en',
-                language: 'English',
-                imgLang: './src/img/login_light/ingles.png',
+                id: 'en',
+                name: 'English',
+                imgLang: '../src/img/login_light/ingles.png',
               }, {
-                ID: 'pt',
-                language: 'Português',
-                imgLang: './src/img/login_light/portugues.png',
+                id: 'pt',
+                name: 'Português',
+                imgLang: '../src/img/login_light/portugues.png',
               }, {
-                ID: 'zh',
-                language: 'Mandarin',
-                imgLang: './src/img/login_light/mandarin.png',
-              }],
-            
+                id: 'zh',
+                name: 'Mandarin',
+                imgLang: '../src/img/login_light/mandarin.png',
+              }],            
         }
     },
-    mounted(){
-      this.setTraductions('es');
-      $(() => {
-            $('#selLang').dxSelectBox({
-              dataSource: this.languages,
-              displayExpr: 'language',
-              valueExpr: 'ID',
-              value: this.languages[0].ID,
-              fieldTemplate(data, container) {
-                const result = $(`
-                <div class='custom-item'>
-                <div class='lang-name'><img alt='idioma' class='lang-label' src='${data ? data.imgLang : ''}' />
-                    </div>
-                </div>`);
-                result
-                  .find('.lang-name')
-                  .dxTextBox({
-                    value: data && data.language,
-                    readOnly: true,
-                  });
-                container.append(result);
-              },
-              itemTemplate(data) {
-                return `<div class='custom-item'>
-                <div class='lang-name'><img alt='idioma' class='lang-options' src='${data.imgLang}' />
-                ${data.language}</div>
-                </div>   `;
-              },
-              onValueChanged(data) {
-                vueLogin.setTraductions(data.value);
-              }
-            });  
-          });
-
-          
-        },
+    computed: {
+        
+      filteredLanguages() {
+          return this.languages.filter(lang => { lang !== this.selectedLanguage });
+      }
+  },
         methods:{
+          toggleDropdown() {
+            this.isDropdownOpen = !this.isDropdownOpen;
+          },
+          selectLanguage(language) {
+            this.selectedLanguage = language;
+            this.isDropdownOpen = false;
+       
+            // Guardar el idioma seleccionado en localStorage
+            localStorage.LanguageSelected = language.id;
+       
+            // Llamar a la función getTranslations
+            //getTranslations(language.id);
+        },
+          handleLanguageChange(languageId) {
+            // Aquí puedes implementar la lógica para manejar el cambio de idioma
+            console.log(`Se ha seleccionado el idioma con ID: ${languageId}`);
+          },
             showPassword(e){
                 if(e.type == "mousedown"){
                     this.eyeState = "eye-open";
@@ -134,15 +129,19 @@ const vueLogin = Vue.createApp({
                 }
             },
             Login(){
+              event.preventDefault();
+              // createToast('success','fue exitoso');
+              window.location.replace('../Main/Main.html');
+              
                 console.log(this);
             },
-            setTraductions(strLanguage){
-              for (var clave in this.labels) {
-                if (this.traducciones.hasOwnProperty(clave)) {
-                  this.labels[clave] = this.traducciones[clave][strLanguage];
-                }
-              }
-            },
+            // setTraductions(strLanguage){
+            //   for (var clave in this.labels) {
+            //     if (this.traducciones.hasOwnProperty(clave)) {
+            //       this.labels[clave] = this.traducciones[clave][strLanguage];
+            //     }
+            //   }
+            // },
         },
 
   }).mount('#appLogin')

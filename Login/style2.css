@@ -12,6 +12,7 @@
     --eyeCloseicon : url(./src/img/login_light/eye-close-dark.svg);
     --eyeOpenIcon : url(./src/img/login_light/eye-open-dark.svg);
     --arrowRightIcon:url(./src/img/login_light/right.svg);
+    --arrowDownIcon:url(./src/img/login_light/downarrow.svg);
     --SpaceIcon : url(./src/img/login_light/logo-color.svg);
     --colorCheck : #B9CC2F;
 }
@@ -19,7 +20,8 @@
 html{
     margin: 0px;
     padding: 0px;
-    height: 100%
+    height: 100%;
+    box-sizing:border-box;
 }
 
 body{
@@ -66,6 +68,12 @@ body{
 .arrow-right{
     content: var(--arrowRightIcon) !important;
     width: 0.5em;
+}
+
+.arrow-down{
+    content: var(--arrowDownIcon) !important;
+    width: 0.5rem;
+    margin: 0px 4px;
 }
 
 .contentBg {
@@ -362,3 +370,50 @@ footer {
     .input-box input {
         width: 84%;}
 }
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-toggle {
+    background-color: transparent;
+    border: none;
+    padding: 2px 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 110px;
+  }
+  
+  .dropdown-toggle img {
+    margin-right: 8px;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 3;
+    display: none;
+  }
+  
+  .dropdown-menu.show {
+    display: block;
+  }
+  
+  .dropdown-item {
+    padding: 2px 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .dropdown-item img {
+    margin-right: 8px;
+  }

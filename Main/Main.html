@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space V3 Light</title>
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
+    <!--<link href="../Modules/assets/ext/ext-7.0.0/build/classic/theme-gray/resources/theme-gray-all-sandbox.css" rel="stylesheet" type="text/css" />-->
+    <!-- <link href="../assets/ext/ext-7.0.0/build/modern/theme-crisp/resources/theme-crisp-all.css" rel="stylesheet" type="text/css" /> -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <!-- daterangepicker CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- DevExtreme theme -->
+    <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/23.1.10/css/dx.light.compact.css">
+    <!-- jQuery contextMenu -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
+    <link href="../assets/css/vendors/scrollbar.css" rel="stylesheet" />
+    <link href="../assets/css/main.css" rel="stylesheet" />
+    <link href="../assets/css/responsive.css" rel="stylesheet" />
+</head>
+<body>
+    <ul class="toastNotifications"></ul>
+    <!-- loader starts-->
+    <div class="loader-wrapper">
+        <div class="loader-index"> <span></span></div>
+        <svg>
+            <defs></defs>
+            <filter id="goo">
+                <fegaussianblur in="SourceGraphic" stddeviation="11" result="blur"></fegaussianblur>
+                <fecolormatrix in="blur" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo">
+                </fecolormatrix>
+            </filter>
+        </svg>
+    </div>
+    <!-- loader ends-->
+    <!-- page-wrapper Start-->
+    <div class="page-wrapper compact-wrapper dark-sidebar" id="pageWrapper">
+        <!-- Page Header Start-->
+        <div class="page-header">
+            <div class="header-wrapper row m-0">
+                <form class="form-inline search-full col" action="#" method="get">
+                    <div class="form-group w-100">
+                        <div class="Typeahead Typeahead--twitterUsers">
+                            <div class="u-posRelative">
+                                <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text" placeholder="Search Cuba .." name="q" title="" autofocus>
+                                <div class="spinner-border Typeahead-spinner" role="status"><span class="sr-only">Loading...</span></div><i class="close-search" data-feather="x"></i>
+                            </div>
+                            <div class="Typeahead-menu"></div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="nav-right col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-11 pull-right right-header p-0 ms-auto">
+
+                    <ul class="nav-menus">
+                        <!-- Buscar Start-->
+                        <li class="li_search header-search" >
+                            <div class="search-box-navbar">
+                                <div class="dropdown-search-navbar">
+                                    <div class="dropdown-toggle-search-navbar" @click="toggleSearchDropdown">
+                                        {{ UserTypeSelected }}
+                                        <span :class="toggleSearchIconClass"></span>
+                                    </div>
+                                    <div class="dropdown-menu-search-navbar" :class="{ show: isSearchDropdownOpen }">
+                                        <div v-for="user in filteredUsers" :key="user" class="dropdown-item-search-navbar" @click="selectUserType(user)">
+                                            {{ user }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="separator_item"></div>
+                            <input type="text" placeholder="Buscar">
+                            <i data-feather="search" class="bg-rounded"></i>
+                        </li>
+                        <!-- Buscar ends-->
+                        <!-- Toogle dark/ligth Start-->
+                        <li>
+                            <div class="dataRangePicker">
+                                <i data-feather="calendar" class="bg-rounded" data-bs-toggle="tooltip" data-bs-placement="bottom" :data-bs-title="getDaterangepicker()"></i>
+                            </div>
+                        </li>
+                        <!-- Toogle dark/ligth ends-->
+                        <!-- Notifications Start-->
+                        <li class="onhover-dropdown" @click="handleClickNotifications">
+                            <div class="notification-box">
+                                <i data-feather="bell" class="bg-rounded" aria-hidden="true"></i>
+                            </div>
+                            <span class="badge rounded-pill badge-secondary">{{ badgeNotifications }}</span>
+                            <div class="onhover-show-div notification-dropdown">
+                                <h6 class="f-18 mb-0 dropdown-title">Eventos</h6>
+                                <div class="notifications-body" id="notificationsGrid"></div>
+                                <h6 class="f-12 mb-0 dropdown-close-all" @click="ClearNotifications">Cerrar todos</h6>
+                            </div>
+                        </li>
+                        <!-- Notifications ends-->
+                        <!-- Profile Start-->
+                        <li class="profile-nav onhover-dropdown pe-0 py-0">
+                            <div class="media profile-media">
+                                <i data-feather="user" class="bg-rounded icon-profile" aria-hidden="true"></i>
+                                <div class="media-body">
+                                    <span>jalfonso</span>
+                                    <p class="mb-0">Admin Flota <i class="fa fa-chevron-down middle"></i></p>
+                                </div>
+                            </div>
+                            <div class="profile-dropdown onhover-show-div">
+                                <div class="mb-0 dropdown-title profile-media">
+                                    <div class="info-profile media-body-profile">
+                                        <span>Johny Alfonso</span>
+                                        <p class="mb-0">Admin Flota</p>
+                                    </div>
+                                    <div class="media-body-profile">
+                                        <span>Último ingreso</span>
+                                        <p class="mb-0">17/05/2024 14:39:12</p>
+                                    </div>
+                                </div>
+                                <ul>
+                                    <li><a href="#"><i data-feather="help-circle"></i><span>Ayuda en línea</span></a></li>
+                                    <li><a href="#"><i data-feather="lock"></i><span>Cambiar contraseña</span></a></li>
+                                    <li><a href="#"><i data-feather="book-open"></i><span>Mis cursos</span></a></li>
+                                    <li><a href="#"><i data-feather="file"></i><span>Formatos</span></a></li>
+                                    <li><a href="#"><i data-feather="bookmark"></i><span>Iconos</span></a></li>
+                                    <li><a href="#"><i data-feather="pie-chart"></i><span>Reportes</span></a></li>
+                                    <li><a href="#"><i data-feather="log-out"> </i><span>Cerrar sesión</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- Profile ends-->
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="page-body-wrapper">
+            <!-- Page Sidebar Start-->
+            <div class="sidebar-wrapper" data-sidebar-layout="stroke-svg">
+                <div>
+                    <div class="logo-wrapper">
+                        <a href="#">
+                            <img class="img-fluid for-light" src="../src/img/Main/logo_Space_main.svg" alt="">
+                            <img class="img-fluid for-dark" src="../src/img/Main/logo_Space_main.svg" alt="">
+                        </a>
+                    </div>
+                    <div class="logo-icon-wrapper">
+                        <a href="#"><img class="img-fluid" src="../src/img/Main/logo-space-white.svg" alt=""></a>
+                    </div>
+                    <div class="toggle" @click="toggleSidebar">
+                        <i class="fa fa-chevron-right" v-if="isSidebarWrapped"></i>
+                        <i class="fa fa-chevron-left" v-else></i>
+                    </div>
+                    <div class="filter-sidebar-main" v-if="!isSidebarWrapped" @click="toggleDropdownFilterSidebar">
+                        <div class="dropdown-filter-sidebar">
+                            <div class="dropdown-toggle-filter-sidebar">
+                                <img :src="selectedFilterSidebar.imgStatus" :alt="selectedFilterSidebar.name">
+                                {{ selectedFilterSidebar.name }}
+                                <span :class="toggleFilterIconClass"></span>
+                            </div>
+                            <div class="dropdown-menu-filter-sidebar" :class="{ show: isDropdownFilterSidebarOpen }">
+                                <div v-for="option in filteredStatusSidebar" :key="option.id" class="dropdown-item-filter-sidebar" @click="selectStatus(option)">
+                                    <img :src="option.imgStatus" :alt="option.name">
+                                    {{ option.name }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <nav class="sidebar-main">
+                        <div id="sidebar-menu">
+                            <ul class="f-12 sidebar-links" id="simple-bar">
+                                <li class="sidebar-list" v-for="flota in filteredFlotas" :key="flota.flotaName">
+                                    <a class="sidebar-link sidebar-title" href="#">
+                                        <i class="stroke-icon fa fa-car" data-bs-toggle="tooltip" data-bs-placement="left" :data-bs-title="getFloatWrapperSidebar(flota.flotaName)"></i>
+                                        <i class="fill-icon fa fa-car"></i>
+                                        <span>{{ flota.flotaName }}</span>
+                                    </a>
+                                    <ul class="f-12 sidebar-submenu">
+                                        <li v-for="(mobile, index) in flota.mobiles" :key="mobile.mobileName">
+                                            <a class="submenu-title" href="#">
+                                                <span>{{ mobile.mobileName }}</span>
+                                                <div class="icons-sidebar-submenu">
+                                                    <img :src="getStatusImage(mobile.status)" :alt="mobile.status" data-bs-toggle="tooltip" data-bs-placement="top" :data-bs-title="getStatusTooltip(mobile.status)" />
+                                                    <img :src="getBatteryIcon(mobile.batery)" :alt="mobile.batery" data-bs-toggle="tooltip" data-bs-placement="top" :data-bs-title="getBatteryTooltip(mobile.batery)" />
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Ver en mapa" @click="toggleShowMap(mobile)"><i :data-feather="getViewMapIcon(mobile)"></i></div>
+                                                    <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Mas opciones" :data-mobile="JSON.stringify(mobile)" class="options-icon"><i data-feather="more-vertical"></i></div>
+                                                </div>
+                                            </a>
+                                            <ul class="f-10 nav-sub-childmenu submenu-content">
+                                                <li class="submenu-content-items">{{ mobile.address }}</li>
+                                                <li class="submenu-content-items">{{ mobile.latitude }} {{ mobile.longitude }}</li>
+                                                <li class="submenu-content-items">{{ mobile.velocity }} - {{ mobile.direction }}</li>
+                                                <li class="submenu-content-items">{{ mobile.dateTime }}</li>
+                                                <li class="submenu-content-items">{{ mobile.driver }}</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="optionsModal" tabindex="-1" aria-labelledby="optionsModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="optionsModalLabel">Opciones</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <ul>
+                                        <li @click="handleOption('comandos')">Comandos</li>
+                                        <li @click="handleOption('camaras')">Cámaras</li>
+                                        <li @click="handleOption('trayectos')">
+                                            Trayectos
+                                            <ul>
+                                                <li @click="handleOption('trayectos-opcion1')">Opción 1</li>
+                                                <li @click="handleOption('trayectos-opcion2')">Opción 2</li>
+                                            </ul>
+                                        </li>
+                                        <li @click="handleOption('propiedades')">Propiedades</li>
+                                        <li @click="handleOption('sensores')">Sensores</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-body">
+                <div class="container-fluid">
+                    <div class="page-title">
+                        <div class="row">
+                            <div class="col-6">
+                                <h3>Sample Page</h3>
+                            </div>
+                            <div class="col-6">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">
+                                        <a href="index.html">
+                                            <svg class="stroke-icon">
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="breadcrumb-item">Pages</li>
+                                    <li class="breadcrumb-item active">Sample Page</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Container-fluid starts-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Sample Card</h5>
+                                    <p class="f-m-light mt-1">Here you can enter a sub-title for your card.</p>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Web Design Trends: </strong> Stay up-to-date with the latest trends in web design, such as the use of animations, micro-interactions, dark mode, and unique navigation techniques.Keep your website's navigation simple and intuitive, allowing users to find what they need easily without overwhelming them with options.</p>
+                                    <p><strong>Design Tools: </strong> Information on popular design software like Adobe Photoshop, Sketch, Figma, or Adobe XD, along with tips and tricks for efficient workflow and collaboration.Compress and optimize images to improve website loading speed and overall performance, providing a better user experience.</p>
+                                    <p><strong>Front-End Development: </strong> A basic understanding of HTML, CSS, and JavaScript can enhance your web design skills, enabling you to create interactive and dynamic elements.Ensure sufficient contrast between text and background colors to enhance readability and accessibility, especially for users with visual impairments.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Container-fluid Ends-->
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- JQuery V3.7.1 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Vue.js V3.0 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- <script src="assets/ext/ext-7.0.0/build/ext-all.js"></script> -->
+    <!-- APP CDN -->
+    <script src="../assets/js/scrollbar/simplebar.js"></script>
+    <script src="../assets/js/scrollbar/custom.js"></script>
+    <script src="../assets/js/sidebar-menu.js"></script>
+    <!-- Moment.js -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <!-- daterangepicker JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <!--Feather Icons-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js" integrity="sha512-zMm7+ZQ8AZr1r3W8Z8lDATkH05QG5Gm2xc6MlsCdBz9l6oE8Y7IXByMgSm/rdRQrhuHt99HAYfMljBOEZ68q5A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- DevExtreme V 23.1 -->
+    <script type="text/javascript" src="https://cdn3.devexpress.com/jslib/23.1.10/js/dx.all.js"></script>
+    <!-- jQuery contextMenu -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
+
+    <script src="../Utilities/SpaceAPI.js"></script>
+    <script src="../assets/js/Main.js" type="module"></script>
+    <script src="../assets/js/script.js"></script>
+    <script src="../Utilities/DataRangePicker.js"></script>
+
+</body>
+</html>

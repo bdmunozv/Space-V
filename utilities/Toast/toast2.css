@@ -1,0 +1,172 @@
+/* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+:root {
+  --dark: #34495E;
+  --light: #ffffff;
+  --success: #0ABF30;
+  --error: #F8584D;
+  --warning: #E9BD0C;
+  --info: #3498DB;
+}
+.toastNotifications {
+  position: fixed;
+  top: 16px;
+  left: 50%; 
+  transform: translateX(-50%);
+  z-index: 4;
+}
+.toastNotifications :where(.toast, .toast-item) {
+  display: flex;
+  align-items: center;
+}
+.toastNotifications .toast {
+  width: 400px;
+  position: relative;
+  /* overflow: hidden; */
+  list-style: none;
+  border-radius: 4px;
+  padding: 12px 17px;
+  margin-bottom: 10px;
+  background: var(--light);
+  justify-content: space-between;
+  animation: show_toast 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+}
+
+
+@keyframes show_toast {
+  0% {
+    transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+    transform-origin: 50% 0%;
+    filter: blur(40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scaleY(1) scaleX(1);
+    transform-origin: 50% 50%;
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.toastNotifications .toast.hide {
+  animation: hide_toast 0.45s cubic-bezier(0.755, 0.050, 0.855, 0.060) both;
+}
+@keyframes hide_toast {
+  0% {
+    transform: translateY(0) scaleY(1) scaleX(1);
+    transform-origin: 50% 0%;
+    filter: blur(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1000px) scaleY(2) scaleX(0.2);
+    transform-origin: 50% 0%;
+    filter: blur(40px);
+    opacity: 0;
+  }
+}
+
+.toast::before {
+  position: absolute;
+  content: "";
+  height: 3px;
+  width: 100%;
+  bottom: 0px;
+  left: 0px;
+  animation: progress 5s linear forwards;
+}
+@keyframes progress {
+  100% {
+    width: 0%;
+  }
+}
+
+.toastNotifications .toast-item div{
+  padding: 0px 12px;
+}
+
+.toast.success{
+  --clr: var(--success);
+}
+.toast.error{
+  --clr: var(--error);
+}
+.toast.warning{
+  --clr: var(--warning);
+}
+.toast.info{
+  --clr: var(--info);
+}
+
+.toast.success::before{
+  background: var(--clr);
+
+}
+.toast.error::before {
+  background: var(--clr);
+}
+.toast.warning::before {
+  background: var(--clr);
+}
+.toast.info::before {
+  background: var(--clr);
+}
+
+.toast .toast-item i {
+  font-size: 1.75rem;
+}
+.toast.success .toast-item i {
+  color: var(--clr);
+}
+.toast.error .toast-item i {
+  color: var(--clr);
+}
+.toast.warning .toast-item i {
+  color: var(--clr);
+}
+.toast.info .toast-item i {
+  color: var(--clr);
+}
+
+.toast .toast-item div p {
+	position: relative;
+	font-size: 0.9rem;
+	margin: 0.25rem 0 0;
+	color: var(--dark);
+	line-height: 1.3rem;
+}
+
+.toast .toast-item div h3 {
+	font-size: 1rem;
+	margin: 0;
+	line-height: 1.35rem;
+	font-weight: 600;
+	position: relative;
+	color: var(--clr);
+}
+
+.toast i:last-child {
+  color: #aeb0d7;
+  cursor: pointer;
+}
+.toast i:last-child:hover {
+  color: var(--dark);
+}
+
+
+@media screen and (max-width: 500px) {
+  .toastNotifications {
+    width: 95%;
+  }
+  .toastNotifications .toast {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+
+}

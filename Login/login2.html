@@ -46,7 +46,21 @@
                 </button>
                 
                 <div class="language-box">
-                    <div id="selLang"></div>
+                    <div class="dropdown">
+                        <div class="dropdown-toggle" @click="toggleDropdown">
+                          <img :src="selectedLanguage.imgLang" :alt="selectedLanguage.name">
+                          {{ selectedLanguage.name }}
+                          <i class="arrow-down icon-end"></i>
+                        </div>
+                        <div class="dropdown-menu" :class="{ show: isDropdownOpen }">
+                          <div v-for="language in languages" :key="language.id" class="dropdown-item" @click="selectLanguage(language)">
+                            <div v-if="language.id != selectedLanguage.id">
+                                <img :src="language.imgLang" :alt="language.name">
+                                {{ language.name }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                 </div>    
             </form>
             <div class="footer-section">
