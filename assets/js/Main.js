@@ -235,12 +235,12 @@ const vueAppMain = Vue.createApp({
             },
             statusSidebar: [
                 { id: 'noFiltro', name: 'sin filtro', imgStatus: '../src/img/Main/icon-nogps.svg' },
-                { id: 'online', name: SpaceAPI.TextTranslation('lnlOnline'), imgStatus: '../src/img/Main/icon-online.svg' },
+                { id: 'online', name: 'lnlOnline', imgStatus: '../src/img/Main/icon-online.svg' },
                 { id: 'noLocaliza', name: 'No localiza', imgStatus: '../src/img/Main/icon-nolocaliza.svg' },
-                { id: 'noGPS', name: SpaceAPI.TextTranslation('lblSinGPS'), imgStatus: '../src/img/Main/icon-nogps.svg' },
+                { id: 'noGPS', name: 'lblSinGPS', imgStatus: '../src/img/Main/icon-nogps.svg' },
                 { id: 'bateriabaja', name: 'Bateria baja', imgStatus: '../src/img/Main/icon-bateriabaja.svg' },
-                { id: 'encendido', name: SpaceAPI.TextTranslation('Encendido'), imgStatus: '../src/img/Main/icon-encendido.svg' },
-                { id: 'apagado', name: SpaceAPI.TextTranslation('Apagado'), imgStatus: '../src/img/Main/icon-apagado.svg' }
+                { id: 'encendido', name: 'Encendido', imgStatus: '../src/img/Main/icon-encendido.svg' },
+                { id: 'apagado', name: 'Apagado', imgStatus: '../src/img/Main/icon-apagado.svg' }
             ],
             optionsUserType: ['Moviles', 'Personas', 'Flotas', 'Usuarios'],
             UserTypeSelected: 'Moviles',
@@ -923,10 +923,10 @@ const vueAppMain = Vue.createApp({
                     vueAppMain.handleOption(key, mobile);
                 },
                 items: {
-                    "comandos": { name: SpaceAPI.TextTranslation("lblCommands") },
-                    "camaras": { name: SpaceAPI.TextTranslation("lblCamara") }, // Crear traducción
+                    "comandos": { name: "lblCommands" },
+                    "camaras": { name:"lblCamara" }, // Crear traducción
                     "trayectos": {
-                        name: SpaceAPI.TextTranslation("Trayecto"),
+                        name: "Trayecto",
                         items: {
                             "ultimo-trayecto": { name: "Último trayecto" }, // Crear traducción
                             "historial-trayectos": { name: "Historial de trayectos" } // Crear traducción
@@ -948,32 +948,32 @@ const vueAppMain = Vue.createApp({
     },
     methods: {
         handleOption(option, mobile) {
-            const optionMappings = {
-                comandos: {
-                    url: `${SpaceAPI.getUrlWhiteBrand()}Modules/CMD/JS/CMD.js?New=0.1`,
-                    callback: () => CreateWinCMD(mobile)
-                },
-                camaras: {
-                    url: `${SpaceAPI.getUrlWhiteBrand()}Modules/Cameras/JS/Cameras.js?New=0.1`,
-                    callback: () => CreateWinCamera(mobile)
-                },
-                propiedades: {
-                    url: `${SpaceAPI.getUrlWhiteBrand()}Modules/Properties/JS/Properties.js?New=0.1`,
-                    callback: () => CreateWinProperties(mobile)
-                },
-                sensores: {
-                    url: `${SpaceAPI.getUrlWhiteBrand()}Modules/Sensors/JS/Sensors.js?New=0.1`,
-                    callback: () => CreateWinSensors(mobile)
-                }
-            };
+            // const optionMappings = {
+            //     comandos: {
+            //         url: `${SpaceAPI.getUrlWhiteBrand()}Modules/CMD/JS/CMD.js?New=0.1`,
+            //         callback: () => CreateWinCMD(mobile)
+            //     },
+            //     camaras: {
+            //         url: `${SpaceAPI.getUrlWhiteBrand()}Modules/Cameras/JS/Cameras.js?New=0.1`,
+            //         callback: () => CreateWinCamera(mobile)
+            //     },
+            //     propiedades: {
+            //         url: `${SpaceAPI.getUrlWhiteBrand()}Modules/Properties/JS/Properties.js?New=0.1`,
+            //         callback: () => CreateWinProperties(mobile)
+            //     },
+            //     sensores: {
+            //         url: `${SpaceAPI.getUrlWhiteBrand()}Modules/Sensors/JS/Sensors.js?New=0.1`,
+            //         callback: () => CreateWinSensors(mobile)
+            //     }
+            // };
 
-            const selectedOption = optionMappings[option];
+            // const selectedOption = optionMappings[option];
 
-            if (selectedOption) {
-                SpaceAPI.loadScript(`${option}Script`, selectedOption.url, selectedOption.callback, false);
-            } else {
-                createToast('success', `Option selected: ${option} for mobile: ${mobile.mobileName}`);
-            }
+            // if (selectedOption) {
+            //     SpaceAPI.loadScript(`${option}Script`, selectedOption.url, selectedOption.callback, false);
+            // } else {
+            //     createToast('success', `Option selected: ${option} for mobile: ${mobile.mobileName}`);
+            // }
         },
         handleClickNotifications() {
             BuildNotificationGrid(objNotification)
